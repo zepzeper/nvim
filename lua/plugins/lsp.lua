@@ -154,6 +154,11 @@ return {
         "json-lsp",
         "yaml-language-server",
         "slang",
+        -- Build tooling, not an LSP: nvim-treesitter shells out to the
+        -- tree-sitter CLI to build and generate parsers, and fails every
+        -- parser with "ENOENT" when it is absent. Nothing in runs/ installs
+        -- it, and Ubuntu has no package, so it comes from mason on both.
+        "tree-sitter-cli",
         -- Linters
         "eslint_d",
         "luacheck",
