@@ -138,6 +138,22 @@ return {
     dependencies = { "mason-org/mason.nvim" },
     opts = {
       ensure_installed = {
+        -- LSP servers, one per entry in vim.lsp.enable above.
+        --
+        -- These are listed explicitly because mason-lspconfig's
+        -- automatic_installation only covers servers registered through
+        -- lspconfig, and these are enabled with native vim.lsp.enable - so
+        -- nothing was guaranteeing them. zls and json-lsp were in fact absent
+        -- while the other eight happened to be installed.
+        "lua-language-server",
+        "zls",
+        "rust-analyzer",
+        "intelephense",
+        "clangd",
+        "bash-language-server",
+        "json-lsp",
+        "yaml-language-server",
+        "slang",
         -- Linters
         "eslint_d",
         "luacheck",
@@ -154,7 +170,8 @@ return {
         "prettier",
         "shfmt",
         "phpcs",
-        "ols"
+        -- ols is an LSP server, but stays here since it was already listed
+        "ols",
       },
     },
   },
