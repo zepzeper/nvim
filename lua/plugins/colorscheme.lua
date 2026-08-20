@@ -7,7 +7,7 @@ return {
       set_dark_mode = function()
         -- vim.cmd([[colorscheme flexoki-dark]])
         -- require("github-theme").load({ theme = "github_dark_high_contrast" })
-        vim.cmd.colorscheme("rose-pine")
+        vim.cmd.colorscheme("rose-pine-moon")
       end,
       set_light_mode = function()
         -- vim.cmd([[colorscheme flexoki-light]])
