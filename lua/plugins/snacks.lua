@@ -293,20 +293,20 @@ return {
       end,
       desc = "Live Grep",
     },
-    {
-      "<leader>ls",
-      function()
-        Snacks.picker.lsp_symbols()
-      end,
-      desc = "Document Symbols",
-    },
-    {
-      "<leader>lS",
-      function()
-        Snacks.picker.lsp_workspace_symbols()
-      end,
-      desc = "Workspace Symbols",
-    },
+    -- {
+    --   "<leader>ls",
+    --   function()
+    --     Snacks.picker.lsp_symbols()
+    --   end,
+    --   desc = "Document Symbols",
+    -- },
+    -- {
+    --   "<leader>lS",
+    --   function()
+    --     Snacks.picker.lsp_workspace_symbols()
+    --   end,
+    --   desc = "Workspace Symbols",
+    -- },
 
     -- ════════════════════════════════════════════════════════════════════
     -- <leader>n = Notifications

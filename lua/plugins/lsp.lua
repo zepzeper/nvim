@@ -6,27 +6,17 @@ local function setup_keymaps(bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, silent = true })
   end
 
-  -- Hover & Signature
-  map("n", "K", function()
-    vim.lsp.buf.hover({ border = "rounded", max_height = 25, max_width = 120 })
-  end, "Hover")
-  map({ "i" }, "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-
-  -- gd, gD, gr, gi, gy handled by Snacks picker (snacks.lua)
-
-  -- Diagnostics navigation
-  map("n", "[d", function()
-    vim.diagnostic.jump({ count = -1 })
-  end, "Prev Diagnostic")
-  map("n", "]d", function()
-    vim.diagnostic.jump({ count = 1 })
-  end, "Next Diagnostic")
-
-  -- <leader>c = Code
-  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-  map("n", "<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
-  map("n", "<leader>cd", vim.diagnostic.open_float, "Line Diagnostic")
-  map("n", "<leader>cv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Definition in Vsplit")
+  local opts = {}
+  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+  vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+  vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+  vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+  vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+  vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+  vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+  vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 
   -- <leader>l = LSP (using native :lsp command from 0.12)
   map("n", "<leader>li", "<cmd>checkhealth vim.lsp<cr>", "LSP Info")
