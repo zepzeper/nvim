@@ -93,6 +93,7 @@ vim.keymap.set(
 -- Select all
 vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select All" })
 
+
 -- Command aliases
 vim.cmd("command! Wq wq")
 vim.cmd("command! W w")

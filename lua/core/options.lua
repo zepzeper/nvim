@@ -61,12 +61,6 @@ vim.opt.shiftwidth = 2 -- Number of spaces for each indentation level
 vim.opt.smartindent = true -- Auto-indent new lines based on syntax
 
 -- ============================================================================
--- Splits
--- ============================================================================
-vim.opt.splitbelow = true -- Open horizontal splits below current window
-vim.opt.splitright = true -- Open vertical splits to the right of current window
-
--- ============================================================================
 -- Files
 -- ============================================================================
 vim.opt.fileencoding = "utf-8" -- File encoding for new files
