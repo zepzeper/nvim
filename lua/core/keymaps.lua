@@ -3,7 +3,6 @@ local default_opts = { noremap = true, silent = true }
 -- Essential Operations
 -- ════════════════════════════════════════════════════════════════════════════
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "File explorer" })
 vim.keymap.set("n", "<C-c>", "<Nop>", default_opts)
 vim.keymap.set("n", "<C-z>", "<Nop>", default_opts)
 

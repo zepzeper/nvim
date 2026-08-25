@@ -19,7 +19,7 @@ api.nvim_create_autocmd("Filetype", {
 -- Highlight on yank
 api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    vim.hl.on_yank()
+    vim.hl.hl_op()
   end,
 })
 
@@ -53,15 +53,6 @@ api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   callback = function()
     vim.opt.spell = true
     vim.opt.spelllang = "en"
-  end,
-})
-
--- Enable line numbers in netrw
-api.nvim_create_autocmd("FileType", {
-  pattern = "netrw",
-  callback = function()
-    vim.opt_local.number = true
-    vim.opt_local.relativenumber = true
   end,
 })
 

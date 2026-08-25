@@ -245,44 +245,6 @@ return {
       end,
       desc = "Neogit",
     },
-    {
-      "<leader>gs",
-      function()
-        Snacks.picker.git_status()
-      end,
-      desc = "Status",
-    },
-    {
-      "<leader>gT",
-      function()
-        Snacks.picker.git_stash()
-      end,
-      desc = "Stash",
-    },
-    {
-      "<leader>gd",
-      function()
-        Snacks.picker.git_diff()
-      end,
-      desc = "Diff (picker)",
-    },
-    {
-      "<leader>gc",
-      function()
-        Snacks.picker.git_branches()
-      end,
-      desc = "Checkout Branch",
-    },
-    {
-      "<leader>go",
-      function()
-        Snacks.gitbrowse()
-      end,
-      desc = "Open in Browser",
-      mode = { "n", "v" },
-    },
-    -- Hunk operations defined in git.lua: gh, ga, gu, gr, gR, gB, gD
-
     -- ════════════════════════════════════════════════════════════════════
     -- <leader>l = LSP / Live
     -- ════════════════════════════════════════════════════════════════════
@@ -293,20 +255,20 @@ return {
       end,
       desc = "Live Grep",
     },
-    -- {
-    --   "<leader>ls",
-    --   function()
-    --     Snacks.picker.lsp_symbols()
-    --   end,
-    --   desc = "Document Symbols",
-    -- },
-    -- {
-    --   "<leader>lS",
-    --   function()
-    --     Snacks.picker.lsp_workspace_symbols()
-    --   end,
-    --   desc = "Workspace Symbols",
-    -- },
+    {
+      "<leader>ls",
+      function()
+        Snacks.picker.lsp_symbols()
+      end,
+      desc = "Document Symbols",
+    },
+    {
+      "<leader>lS",
+      function()
+        Snacks.picker.lsp_workspace_symbols()
+      end,
+      desc = "Workspace Symbols",
+    },
 
     -- ════════════════════════════════════════════════════════════════════
     -- <leader>n = Notifications

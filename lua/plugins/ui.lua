@@ -125,39 +125,6 @@ return {
   },
 
   -- ════════════════════════════════════════════════════════════════════════════
-  -- Markdown Preview (browser-based with mermaid support)
-  -- ════════════════════════════════════════════════════════════════════════════
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-      vim.g.mkdp_auto_close = 1
-      vim.g.mkdp_theme = "dark"
-      -- Enable mermaid, katex, and other features
-      vim.g.mkdp_preview_options = {
-        mermaid = { theme = "dark" },
-        katex = {},
-        disable_sync_scroll = 0,
-        sync_scroll_type = "middle",
-        hide_yaml_meta = 1,
-        sequence_diagrams = {},
-        flowchart_diagrams = {},
-      }
-    end,
-    keys = {
-      {
-        "<leader>mp",
-        "<cmd>MarkdownPreviewToggle<cr>",
-        desc = "Markdown Preview",
-        ft = "markdown",
-      },
-    },
-  },
-
-  -- ════════════════════════════════════════════════════════════════════════════
   -- Render Markdown (in-buffer rendering)
   -- ════════════════════════════════════════════════════════════════════════════
   {
