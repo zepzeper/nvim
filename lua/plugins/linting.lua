@@ -56,7 +56,7 @@ return {
       zsh = { "shellcheck" },
       fish = { "fish" },
       -- php = { "phpstan" },
-      rust = { "clippy" },
+      -- rust = { "clippy" },
       yaml = { "yamllint" },
       json = { "jsonlint" },
       jsonc = { "jsonlint" },
