@@ -93,6 +93,9 @@ vim.keymap.set(
 -- Select all
 vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select All" })
 
+vim.keymap.set("n", "<C-x>b", ":buffer ", {
+  desc = "Switch buffer",
+})
 
 -- Command aliases
 vim.cmd("command! Wq wq")
