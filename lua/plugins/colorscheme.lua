@@ -41,29 +41,6 @@ return {
   },
 
   -- ════════════════════════════════════════════════════════════════════════════
-  -- Yukinord
-  -- ════════════════════════════════════════════════════════════════════════════
-  {
-    "adibhanna/yukinord.nvim",
-    -- dir = "~/Developer/opensource/yukinord/neovim",
-    config = function()
-      require("yukinord").setup({
-        transparent = true,
-        transparent_sidebar = true,
-      })
-      -- vim.cmd("colorscheme yukinord")
-    end,
-  },
-
-  -- ════════════════════════════════════════════════════════════════════════════
-  -- Forest Night
-  -- ════════════════════════════════════════════════════════════════════════════
-  {
-    "adibhanna/forest-night.nvim",
-    priority = 1000,
-  },
-
-  -- ════════════════════════════════════════════════════════════════════════════
   -- Catppuccin (with custom gruvbox-inspired colors)
   -- ════════════════════════════════════════════════════════════════════════════
   {
@@ -508,6 +485,94 @@ return {
     end,
   },
 
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "moon", -- "storm", "night", "moon", "day"
+      transparent = false,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = false },
+        keywords = { italic = false },
+      },
+    },
+  },
+
+  {
+    "EdenEast/nightfox.nvim",
+    priority = 1000,
+    config = function()
+      require("nightfox").setup({
+        options = {
+          transparent = true,
+          styles = {
+            comments = "NONE",
+            keywords = "NONE",
+          },
+        },
+      })
+      -- variants: nightfox, duskfox, nordfox, terafox, carbonfox
+      vim.cmd("colorscheme carbonfox")
+    end,
+  },
+
+  {
+    "neanias/everforest-nvim",
+    priority = 1000,
+    config = function()
+      require("everforest").setup({
+        background = "hard", -- "soft", "medium", "hard"
+        transparent_background_level = 0,
+        italics = false,
+      })
+    end,
+  },
+
+  {
+    "shaunsingh/nord.nvim",
+    priority = 1000,
+    config = function()
+      vim.g.nord_contrast = true
+      vim.g.nord_borders = false
+      vim.g.nord_disable_background = false
+      vim.g.nord_italic = false
+    end,
+  },
+
+  {
+    "sainnhe/sonokai",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.sonokai_style = "shusia" -- "default", "atlantis", "andromeda", "shusia", "maia", "espresso"
+      vim.g.sonokai_enable_italic = false
+    end,
+  },
+
+  {
+    "Mofiqul/dracula.nvim",
+    priority = 1000,
+    config = function()
+      require("dracula").setup({
+        italic_comment = false,
+        transparent_bg = false,
+      })
+    end,
+  },
+
+  {
+    "marko-cerovac/material.nvim",
+    priority = 1000,
+    config = function()
+      vim.g.material_style = "deep ocean" -- "darker", "lighter", "oceanic", "palenight", "deep ocean"
+      require("material").setup({
+        italics = { comments = false, keywords = false },
+      })
+    end,
+  },
+
   -- ════════════════════════════════════════════════════════════════════════════
   -- Nordic
   -- ════════════════════════════════════════════════════════════════════════════
@@ -621,5 +686,45 @@ return {
         transparent_mode = false,
       })
     end,
+  },
+  {
+    'Shatur/neovim-ayu',
+    priority = 1000, -- load early since it's a colorscheme
+    config = function()
+      require('ayu').setup({
+        mirage = false, -- set true for the mirage variant
+      })
+      vim.cmd('colorscheme ayu')
+    end,
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd('colorscheme kanagawa')
+    end,
+  },
+
+  -- ════════════════════════════════════════════════════════════════════════════
+  -- Yukinord
+  -- ════════════════════════════════════════════════════════════════════════════
+  {
+    "adibhanna/yukinord.nvim",
+    -- dir = "~/Developer/opensource/yukinord/neovim",
+    config = function()
+      require("yukinord").setup({
+        transparent = true,
+        transparent_sidebar = true,
+      })
+      -- vim.cmd("colorscheme yukinord")
+    end,
+  },
+
+  -- ════════════════════════════════════════════════════════════════════════════
+  -- Forest Night
+  -- ════════════════════════════════════════════════════════════════════════════
+  {
+    "adibhanna/forest-night.nvim",
+    priority = 1000,
   },
 }
