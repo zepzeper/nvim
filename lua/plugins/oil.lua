@@ -80,7 +80,9 @@ return {
         -- Parent directory
         ["-"] = "actions.parent",
       },
+      use_default_keymaps = false,
     },
+
 
     config = function(_, opts)
       require("oil").setup(opts)
