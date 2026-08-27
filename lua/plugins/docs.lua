@@ -1,18 +1,15 @@
 return {
   {
-    "girishji/devdocs.vim",
-    cmd = { "DevdocsFind", "DevdocsInstall", "DevdocsUninstall" },
-    init = function()
-      vim.g.DevdocsOptions = {
-        data_dir = vim.fn.expand("~/.local/share/devdocs"),
-        pandoc = "pandoc",
-        height = 20,
-        open_mode = "split",
-      }
+    'emmanueltouzery/apidocs.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    cmd = { 'ApidocsSearch', 'ApidocsInstall', 'ApidocsOpen', 'ApidocsUninstall' },
+    config = function()
+      require('apidocs').setup({ picker = 'ui_select' })
     end,
     keys = {
-      { "<leader>dd", "<cmd>DevdocsFind<CR>", desc = "DevDocs: Find" },
-      { "<leader>di", "<cmd>DevdocsInstall<CR>", desc = "DevDocs: Install" },
+       { '<C-x>p', '<cmd>ApidocsOpen<cr>', desc = 'Docs: Open (browse)' },
     },
   }
 }
