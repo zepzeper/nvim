@@ -5,7 +5,7 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
-    dashboard = { enabled = true },
+    dashboard = { enabled = false },
     explorer = { enabled = false },
     image = {
       enabled = true,
@@ -25,11 +25,28 @@ return {
       layout = {
         preset = "bottom",
       },
+      matcher = {
+        fuzzy = true,
+        smartcase = true,
+        ignorecase = true,
+        filename_bonus = true,
+        cwd_bonus = true,
+        frecency = true,
+        history_bonus = true,
+      },
+      formatters = {
+        file = {
+          filename_first = true,
+          truncate = "left",
+          min_width = 60,
+        },
+      },
       win = {
         input = {
           keys = {
             ["<C-d>"] = { "preview_scroll_down", mode = { "n", "i" } },
             ["<C-u>"] = { "preview_scroll_up", mode = { "n", "i" } },
+            ["<C-p>"] = { "toggle_preview", mode = { "n", "i" } },
           },
         },
       },
