@@ -2,17 +2,12 @@ return {
   {
     "stevearc/oil.nvim",
     lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-
     opts = {
       -- Make Oil the default directory browser.
       default_file_explorer = true,
 
       -- Similar information density to `ls -la`.
       columns = {
-        "icon",
         "permissions",
         "size",
         "mtime",
