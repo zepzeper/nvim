@@ -93,9 +93,9 @@ vim.keymap.set(
 -- Select all
 vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select All" })
 
-vim.keymap.set("n", "<C-x>b", ":buffer ", {
-  desc = "Switch buffer",
-})
+vim.keymap.set("n", "<C-x>0", "<cmd>hide<cr>", { desc = "Hide current window" })
+vim.keymap.set("n", "<C-x>k", "<cmd>bdelete<cr>", { desc = "Kill/delete current buffer" })
+vim.keymap.set("n", "<C-x>b", "<cmd>buffer<space><cr>", { desc = "Switch buffer" })
 
 -- Command aliases
 vim.cmd("command! Wq wq")
