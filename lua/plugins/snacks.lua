@@ -1,3 +1,38 @@
+-- Emacs `M-x` completes over commands only; key bindings are shown as
+-- annotations on those candidates, not as candidates of their own
+-- (`suggest-key-bindings`, on by default). Neovim keeps no command->key index,
+-- so derive one from any mapping whose rhs is a plain `<Cmd>Foo<CR>` / `:Foo<CR>`.
+-- Mappings bound to Lua callbacks carry no rhs and cannot be attributed.
+local function command_keys()
+  local all = {} ---@type table<string, table<string, true>>
+  for _, mode in ipairs({ "n", "x", "i" }) do
+    local maps = vim.api.nvim_get_keymap(mode)
+    vim.list_extend(maps, vim.api.nvim_buf_get_keymap(0, mode))
+    for _, m in ipairs(maps) do
+      local name = m.rhs
+        and (m.rhs:match("^<[Cc][Mm][Dd]>%s*(%a[%w_]*)") or m.rhs:match("^:%s*(%a[%w_]*)"))
+      -- Require two chars, so the `:m '>+1` of a line-move mapping is not
+      -- read as the `:move` command and annotated onto it.
+      if name and #name > 1 then
+        all[name] = all[name] or {}
+        all[name][vim.fn.keytrans(vim.api.nvim_replace_termcodes(m.lhs, true, true, true))] = true
+      end
+    end
+  end
+  -- `nvim_get_keymap` order is not stable, so a command with several bindings
+  -- would otherwise be annotated with a different one run to run. Pick the
+  -- shortest, breaking ties lexically, so the annotation is stable.
+  local keys = {} ---@type table<string, string>
+  for name, set in pairs(all) do
+    local lhs = vim.tbl_keys(set)
+    table.sort(lhs, function(a, b)
+      return #a == #b and a < b or #a < #b
+    end)
+    keys[name] = lhs[1]
+  end
+  return keys
+end
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -23,7 +58,9 @@ return {
     picker = {
       enabled = true,
       layout = {
-        preset = "bottom",
+        preset = "ivy_split",
+        -- 10 candidate rows, like vertico-count in Doom
+        layout = { height = 13 },
       },
       matcher = {
         fuzzy = true,
@@ -56,6 +93,12 @@ return {
         grep = { limit = 10000 },
         gh_issue = {},
         gh_pr = {},
+        -- These preview a `vim.inspect()` dump, not a file. With the global
+        -- `preview = "main"` that dump floats over the whole editor, which is
+        -- noise -- Emacs `M-x` never touches your buffer. Drop the preview.
+        commands = { layout = { preview = false } },
+        keymaps = { layout = { preview = false } },
+        registers = { layout = { preview = false } },
       },
     },
     quickfile = { enabled = true },
@@ -90,6 +133,28 @@ return {
         Snacks.picker.git_files()
       end,
       desc = "Find Files",
+    },
+
+    -- M-x = execute-extended-command: commands only, annotated with their keys.
+    {
+      "<M-x>",
+      function()
+        local keys = command_keys()
+        Snacks.picker.commands({
+          title = "M-x",
+          format = function(item, picker)
+            local ret = Snacks.picker.format.command(item, picker)
+            local key = keys[item.cmd]
+            if key then
+              ret[#ret + 1] = { " " }
+              ret[#ret + 1] = { key, "SnacksPickerKey" }
+            end
+            return ret
+          end,
+        })
+      end,
+      desc = "M-x",
+      mode = { "n", "x" },
     },
 
     -- Terminal
@@ -130,42 +195,23 @@ return {
     -- ════════════════════════════════════════════════════════════════════
     -- <leader>b = Buffers
     -- ════════════════════════════════════════════════════════════════════
+    -- C-x b = switch-to-buffer. Emacs defaults the candidate to the *other*
+    -- buffer and excludes the current one, so `C-x b RET` toggles back.
+    -- `C-x C-b` = list-buffers, which in Emacs keeps the current buffer listed.
     {
-      "<leader>bb",
+      "<C-x>b",
       function()
-        Snacks.picker.buffers({
-          win = {
-            input = {
-              keys = { ["dd"] = "bufdelete", ["<C-d>"] = { "bufdelete", mode = { "n", "i" } } },
-            },
-            list = { keys = { ["dd"] = "bufdelete" } },
-          },
-        })
+        Snacks.picker.buffers({ current = false })
       end,
-      desc = "Switch Buffer",
+      desc = "Switch Buffer (C-x b)",
     },
     {
-      "<leader>bd",
+      "<C-x><C-b>",
       function()
-        Snacks.bufdelete()
+        Snacks.picker.buffers({ current = true })
       end,
-      desc = "Delete Buffer",
+      desc = "List Buffers (C-x C-b)",
     },
-    {
-      "<leader>bo",
-      function()
-        Snacks.bufdelete.other()
-      end,
-      desc = "Delete Other Buffers",
-    },
-    {
-      "Q",
-      function()
-        Snacks.bufdelete()
-      end,
-      desc = "Delete Buffer",
-    },
-
     -- ════════════════════════════════════════════════════════════════════
     -- <leader>c = Code
     -- ════════════════════════════════════════════════════════════════════

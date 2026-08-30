@@ -50,23 +50,17 @@ vim.keymap.set("n", "#", "#zzzv", { desc = "Search Word Back (centered)" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", default_opts)
 vim.keymap.set("n", "<C-d>", "<C-d>zz", default_opts)
 
--- Buffer navigation
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-
 -- Tab navigation
-vim.keymap.set("n", "<C-t>c", ":tabclose<CR>", { desc = "Close tab" })
-vim.keymap.set("n", "<C-t>o", ":tabnew<CR>", { desc = "Open tab" })
-vim.keymap.set("n", "<C-t>h", ":tabnew %<CR>", { desc = "Open current file in new tab" })
-vim.keymap.set("n", "<C-t>n", ":tabnext<CR>", { desc = "Next tab" })
-vim.keymap.set("n", "<C-t>p", ":tabprevious<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<C-x>t<C-c>", ":tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<C-x>t<C-o>", ":tabnew<CR>", { desc = "Open tab" })
+vim.keymap.set("n", "<C-x>t<C-h>", ":tabnew %<CR>", { desc = "Open current file in new tab" })
+vim.keymap.set("n", "<C-x>t<C-n>", ":tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<C-x>t<C-p>", ":tabprevious<CR>", { desc = "Previous tab" })
 
-vim.keymap.set("n", "<C-c>c", ":cclose<CR>", { desc = "Close quickfix" })
-vim.keymap.set("n", "<C-c>o", ":copen<CR>", { desc = "Open quickfix" })
-vim.keymap.set("n", "<C-c>n", ":cnext<CR>", { desc = "Next quickfix" })
-vim.keymap.set("n", "<C-c>p", ":cprev<CR>", { desc = "Previous quickfix" })
+vim.keymap.set("n", "<C-x><C-c>", ":cclose<CR>", { desc = "Close quickfix" })
+vim.keymap.set("n", "<C-x><C-o>", ":copen<CR>", { desc = "Open quickfix" })
+vim.keymap.set("n", "<C-x><C-n>", ":cnext<CR>", { desc = "Next quickfix" })
+vim.keymap.set("n", "<C-x><C-p>", ":cprev<CR>", { desc = "Previous quickfix" })
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- Better Editing
@@ -82,20 +76,8 @@ vim.keymap.set("v", "p", '"_dP', { desc = "Paste (no yank)" })
 -- Yank block
 vim.keymap.set("n", "YY", "va{Vy", { desc = "Yank Block {}" })
 
--- Split line (opposite of J)
-vim.keymap.set(
-  "n",
-  "X",
-  ":keeppatterns substitute/\\s*\\%#\\s*/\\r/e <bar> normal! ==^<cr>",
-  { desc = "Split Line", silent = true }
-)
-
--- Select all
-vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select All" })
-
 vim.keymap.set("n", "<C-x>0", "<cmd>hide<cr>", { desc = "Hide current window" })
 vim.keymap.set("n", "<C-x>k", "<cmd>bdelete<cr>", { desc = "Kill/delete current buffer" })
-vim.keymap.set("n", "<C-x>b", "<cmd>buffer<space><cr>", { desc = "Switch buffer" })
 
 -- Command aliases
 vim.cmd("command! Wq wq")
