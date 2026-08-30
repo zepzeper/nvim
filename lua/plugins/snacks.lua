@@ -51,6 +51,7 @@ return {
         },
       },
       sources = {
+        apidocs = {},
         files = { limit = 10000, hidden = true },
         grep = { limit = 10000 },
         gh_issue = {},

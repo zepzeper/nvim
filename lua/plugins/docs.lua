@@ -6,7 +6,7 @@ return {
     },
     cmd = { 'ApidocsSearch', 'ApidocsInstall', 'ApidocsOpen', 'ApidocsUninstall' },
     config = function()
-      require('apidocs').setup({ picker = 'ui_select' })
+      require('apidocs').setup({ picker = 'snacks' })
     end,
     keys = {
        { '<C-x>p', '<cmd>ApidocsOpen<cr>', desc = 'Docs: Open (browse)' },
