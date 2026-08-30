@@ -82,39 +82,35 @@ return {
 
 
     config = function(_, opts)
+      opts.win_options = opts.win_options or {}
+
+      opts.win_options.number = true
+      opts.win_options.relativenumber = true
+      opts.win_options.cursorline = true
+
       require("oil").setup(opts)
 
-      -- `-` from anywhere opens Oil.
       vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>", {
         desc = "Open Oil",
       })
 
-
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "oil",
         callback = function()
-          vim.opt_local.cursorline = true
-          vim.opt_local.number = true
-          vim.opt_local.relativenumber = true
-
-          -- Directories
           vim.api.nvim_set_hl(0, "OilDir", {
             fg = "#7aa2f7",
             bold = true,
           })
 
-          -- Regular files
           vim.api.nvim_set_hl(0, "OilFile", {
             fg = "#c0caf5",
           })
 
-          -- Links
           vim.api.nvim_set_hl(0, "OilLink", {
             fg = "#bb9af7",
             underline = true,
           })
 
-          -- Make the current line stand out.
           vim.api.nvim_set_hl(0, "CursorLine", {
             bg = "#292e42",
           })
