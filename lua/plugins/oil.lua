@@ -11,6 +11,8 @@ return {
         "permissions",
         "size",
         "mtime",
+        "user",
+        "group",
       },
 
       -- Show dotfiles by default.
@@ -92,6 +94,8 @@ return {
         pattern = "oil",
         callback = function()
           vim.opt_local.cursorline = true
+          vim.opt_local.number = true
+          vim.opt_local.relativenumber = true
 
           -- Directories
           vim.api.nvim_set_hl(0, "OilDir", {
