@@ -29,6 +29,28 @@ return {
     }
     luacheck.stdin = true
 
+    local phpstan = lint.linters.phpstan
+    phpstan.cmd = function()
+      local root = vim.fs.root(0, {
+        "composer.json",
+        "phpstan.neon",
+        "phpstan.neon.dist",
+      })
+
+      return root and (root .. "/vendor/bin/phpstan") or "phpstan"
+    end
+
+    phpstan.args = {
+      "analyze",
+      "--error-format=json",
+      "--memory-limit",
+      "2G",
+      "--no-progress",
+      function()
+        return vim.api.nvim_buf_get_name(0)
+      end,
+    }
+
     -- Configure eslint_d
     if lint.linters.eslint_d then
       lint.linters.eslint_d.args = {
@@ -55,8 +77,8 @@ return {
       bash = { "shellcheck" },
       zsh = { "shellcheck" },
       fish = { "fish" },
-      -- php = { "phpstan" },
-      -- rust = { "clippy" },
+      php = { "phpstan" },
+      rust = { "clippy" },
       yaml = { "yamllint" },
       json = { "jsonlint" },
       jsonc = { "jsonlint" },
