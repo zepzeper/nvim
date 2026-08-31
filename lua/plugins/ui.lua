@@ -188,8 +188,8 @@ return {
     opts = {
       win = {
         type = "split",
-        position = "bottom",
-        size = 15,
+        position = "right",
+        size = 40,
       },
     },
     lazy = true,

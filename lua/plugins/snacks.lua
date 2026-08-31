@@ -121,13 +121,6 @@ return {
       desc = "Scratch Buffer",
     },
     {
-      "<leader>E",
-      function()
-        vim.diagnostic.open_float()
-      end,
-      desc = "Diagnostics",
-    },
-    {
       "<C-p>",
       function()
         Snacks.picker.git_files()
@@ -222,31 +215,6 @@ return {
     -- cd (line diagnostic) - defined in lsp.lua
 
     -- ════════════════════════════════════════════════════════════════════
-    -- <leader>d = Diagnostics
-    -- ════════════════════════════════════════════════════════════════════
-    {
-      "<leader>dd",
-      function()
-        Snacks.picker.diagnostics()
-      end,
-      desc = "Workspace Diagnostics",
-    },
-    {
-      "<leader>db",
-      function()
-        Snacks.picker.diagnostics_buffer()
-      end,
-      desc = "Buffer Diagnostics",
-    },
-    {
-      "<leader>dq",
-      function()
-        Snacks.picker.qflist()
-      end,
-      desc = "Quickfix List",
-    },
-
-    -- ════════════════════════════════════════════════════════════════════
     -- <leader>f = Files
     -- ════════════════════════════════════════════════════════════════════
     {
@@ -292,36 +260,11 @@ return {
       desc = "Config Files",
     },
     {
-      "<leader>fR",
-      function()
-        Snacks.rename.rename_file()
-      end,
-      desc = "Rename File",
-    },
-
-    -- ════════════════════════════════════════════════════════════════════
-    -- <leader>l = LSP / Live
-    -- ════════════════════════════════════════════════════════════════════
-    {
       "<leader>lg",
       function()
         Snacks.picker.grep()
       end,
       desc = "Live Grep",
-    },
-    {
-      "<leader>ls",
-      function()
-        Snacks.picker.lsp_symbols()
-      end,
-      desc = "Document Symbols",
-    },
-    {
-      "<leader>lS",
-      function()
-        Snacks.picker.lsp_workspace_symbols()
-      end,
-      desc = "Workspace Symbols",
     },
 
     -- ════════════════════════════════════════════════════════════════════
@@ -361,27 +304,6 @@ return {
       desc = "Buffer Lines",
     },
     {
-      "<leader>sB",
-      function()
-        Snacks.picker.grep_buffers()
-      end,
-      desc = "Grep Buffers",
-    },
-    {
-      "<leader>sm",
-      function()
-        Snacks.picker.marks()
-      end,
-      desc = "Marks",
-    },
-    {
-      "<leader>sj",
-      function()
-        Snacks.picker.jumps()
-      end,
-      desc = "Jumps",
-    },
-    {
       "<leader>sk",
       function()
         Snacks.picker.keymaps()
@@ -389,60 +311,11 @@ return {
       desc = "Keymaps",
     },
     {
-      "<leader>sc",
-      function()
-        Snacks.picker.commands()
-      end,
-      desc = "Commands",
-    },
-    {
-      "<leader>s:",
-      function()
-        Snacks.picker.command_history()
-      end,
-      desc = "Command History",
-    },
-    {
-      "<leader>s/",
-      function()
-        Snacks.picker.search_history()
-      end,
-      desc = "Search History",
-    },
-    {
-      "<leader>sr",
-      function()
-        Snacks.picker.registers()
-      end,
-      desc = "Registers",
-    },
-    {
-      "<leader>sR",
-      function()
-        Snacks.picker.resume()
-      end,
-      desc = "Resume Last",
-    },
-    {
-      "<leader>su",
-      function()
-        Snacks.picker.undo()
-      end,
-      desc = "Undo History",
-    },
-    {
       "<leader>sM",
       function()
         Snacks.picker.man()
       end,
       desc = "Man Pages",
-    },
-    {
-      "<leader>si",
-      function()
-        Snacks.picker.icons()
-      end,
-      desc = "Icons",
     },
 
     -- ════════════════════════════════════════════════════════════════════
