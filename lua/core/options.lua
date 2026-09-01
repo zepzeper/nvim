@@ -44,6 +44,8 @@ vim.opt.pumheight = 10 -- Maximum height of popup menu
 vim.opt.fillchars = { eob = " " } -- Hide ~ characters on empty lines
 vim.o.winborder = "rounded" -- Use rounded borders for floating windows
 -- vim.opt.pumborder = "rounded" -- Rounded border for completion popup menu (0.12+)
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- ============================================================================
 -- Search

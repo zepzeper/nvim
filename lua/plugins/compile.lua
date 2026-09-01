@@ -19,7 +19,11 @@ return {
         -- to make `:Compile` replace special characters (e.g. `%`) in
         -- the command (and behave more like `:!`), add:
          bang_expansion = true,
+
+        default_command = ""
       }
+
+      vim.keymap.set("n", "<C-x>c", "<Cmd>Compile<CR>")
     end
   }
 }
