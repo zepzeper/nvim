@@ -27,6 +27,7 @@ vim.opt.autoread = true -- Automatically reload files changed outside of Neovim
 -- ============================================================================
 -- UI/Display
 -- ============================================================================
+vim.opt.ch = 3
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
 vim.opt.number = true -- Show absolute line numbers
 vim.opt.relativenumber = true -- Show relative line numbers (hybrid with number=true)
