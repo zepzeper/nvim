@@ -28,35 +28,35 @@ return {
       desc = "Harpoon Add File",
     },
     {
-      "<C-e>",
+      "<M-e>",
       function()
         require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
       end,
       desc = "Harpoon Menu",
     },
     {
-      "<C-h>",
+      "<M-h>",
       function()
         require("harpoon"):list():select(1)
       end,
       desc = "Harpoon File 1",
     },
     {
-      "<C-j>",
+      "<M-j>",
       function()
         require("harpoon"):list():select(2)
       end,
       desc = "Harpoon File 2",
     },
     {
-      "<C-k>",
+      "<M-k>",
       function()
         require("harpoon"):list():select(3)
       end,
       desc = "Harpoon File 3",
     },
     {
-      "<C-l>",
+      "<M-l>",
       function()
         require("harpoon"):list():select(4)
       end,

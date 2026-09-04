@@ -9,15 +9,6 @@ vim.keymap.set("n", "<C-z>", "<Nop>", default_opts)
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear Highlight", silent = true })
 
--- ════════════════════════════════════════════════════════════════════════════
--- Window Navigation (no prefix for speed)
--- ════════════════════════════════════════════════════════════════════════════
-
-vim.keymap.set("n", "<M-h>", "<C-w>h", { desc = "Go Left" })
-vim.keymap.set("n", "<M-j>", "<C-w>j", { desc = "Go Down" })
-vim.keymap.set("n", "<M-k>", "<C-w>k", { desc = "Go Up" })
-vim.keymap.set("n", "<M-l>", "<C-w>l", { desc = "Go Right" })
-
 -- Window resizing
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Height" })
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Height" })
