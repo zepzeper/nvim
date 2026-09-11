@@ -75,23 +75,4 @@ return {
       { "<leader>dv", function() require("dap-view").toggle() end, desc = "Toggle View" },
     },
   },
-  {
-    "theHamsta/nvim-dap-virtual-text",
-    lazy = true,
-    opts = {},
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    lazy = true,
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-    opts = {
-      ensure_installed = { "php-debug-adapter" },
-      automatic_installation = true,
-      handlers = {
-        function(config)
-          require("mason-nvim-dap").default_setup(config)
-        end,
-      },
-    },
-  },
 }
