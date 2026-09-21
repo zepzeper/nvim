@@ -15,7 +15,7 @@ local function load(fn)
         border = "none",
         preview = {
           layout = "horizontal",
-          horizontal = "right:50%",
+          horizontal = "right:70%",
         },
       },
       -- Derive all fzf colors from the active colorscheme (follows
