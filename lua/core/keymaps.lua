@@ -76,3 +76,39 @@ vim.cmd("command! W w")
 vim.cmd("command! Q q")
 vim.cmd("command! X x")
 vim.cmd("command! Xa xa")
+
+-- ════════════════════════════════════════════════════════════════════════════
+-- Toggles (<leader>u = UI/Toggle)
+-- ════════════════════════════════════════════════════════════════════════════
+vim.keymap.set("n", "<leader>us", function()
+  vim.o.spell = not vim.o.spell
+end, { desc = "Toggle Spelling" })
+vim.keymap.set("n", "<leader>uw", function()
+  vim.o.wrap = not vim.o.wrap
+end, { desc = "Toggle Wrap" })
+vim.keymap.set("n", "<leader>ur", function()
+  vim.o.relativenumber = not vim.o.relativenumber
+end, { desc = "Toggle Relative Number" })
+vim.keymap.set("n", "<leader>ul", function()
+  local on = vim.o.number or vim.o.relativenumber
+  vim.o.number, vim.o.relativenumber = not on, not on
+end, { desc = "Toggle Line Numbers" })
+vim.keymap.set("n", "<leader>uD", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = "Toggle Diagnostics" })
+vim.keymap.set("n", "<leader>uc", function()
+  vim.o.conceallevel = vim.o.conceallevel == 0 and 2 or 0
+end, { desc = "Toggle Conceal" })
+vim.keymap.set("n", "<leader>uT", function()
+  local ok = pcall(vim.treesitter.stop, 0)
+  if ok then
+    return
+  end
+  pcall(vim.treesitter.start, 0)
+end, { desc = "Toggle Treesitter Highlighting" })
+vim.keymap.set("n", "<leader>uh", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+end, { desc = "Toggle Inlay Hints" })
+vim.keymap.set("n", "<leader>ui", function()
+  vim.o.list = not vim.o.list
+end, { desc = "Toggle Indent Guides" })

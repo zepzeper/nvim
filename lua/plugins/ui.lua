@@ -1,181 +1,80 @@
--- UI: Which-key, diagnostics display, notifications, and visual enhancements
-return {
-  { "nvim-tree/nvim-web-devicons", lazy = true },
-  -- ════════════════════════════════════════════════════════════════════════════
-  -- Which-key (keybinding help)
-  -- ════════════════════════════════════════════════════════════════════════════
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      preset = "helix",
-      delay = 250,
-      sort = { "alphanum", "local", "order", "group", "mod" },
-      icons = {
-        mappings = false,
-        rules = false,
-        breadcrumb = "»",
-        separator = "→",
-        group = "+",
-      },
-      plugins = {
-        marks = true,
-        registers = true,
-        spelling = { enabled = false },
-      },
-      win = {
-        border = "rounded",
-        padding = { 1, 2 },
-      },
-      spec = {
-        mode = { "n", "v" },
-        -- Top-level quick access
-        { "<leader><space>", desc = "Find Files" },
-        { "<leader>/", desc = "Grep" },
-        { "<leader>,", desc = "Buffers" },
-        { "<leader>.", desc = "Scratch" },
-        { "<leader>e", desc = "Explorer" },
-        { "<leader>q", desc = "Quit" },
-        { "<leader>Q", desc = "Quit All" },
-        -- Main groups
-        { "<leader>b", group = "Buffers" },
-        { "<leader>c", group = "Code" },
-        { "<leader>d", group = "Diagnostics" },
-        { "<leader>f", group = "Files" },
-        { "<leader>g", group = "Git" },
-        { "<leader>gh", group = "Hunks" },
-        { "<leader>l", group = "LSP" },
-        { "<leader>m", group = "Markdown" },
-        { "<leader>n", group = "Notifications" },
-        { "<leader>s", group = "Search" },
-        { "<leader>u", group = "UI/Toggle" },
-        { "<leader>w", group = "Windows" },
-        -- Navigation groups
-        { "[", group = "Prev" },
-        { "]", group = "Next" },
-        { "g", group = "Goto" },
-      },
-    },
-    keys = {
-      {
-        "<leader>?",
-        function()
-          require("which-key").show({ global = false })
-        end,
-        desc = "Buffer Keymaps",
-      },
-      {
-        "<leader>K",
-        function()
-          require("which-key").show({ global = true })
-        end,
-        desc = "All Keymaps",
-      },
-    },
-  },
+-- UI: which-key, inline diagnostics, markdown rendering, icons
+local pack = require("core.pack")
 
-  -- ════════════════════════════════════════════════════════════════════════════
-  -- Inline diagnostics (prettier diagnostic display)
-  -- ════════════════════════════════════════════════════════════════════════════
-  {
-    "rachartier/tiny-inline-diagnostic.nvim",
-    event = "VeryLazy",
-    priority = 1000,
-    config = function()
-      require("tiny-inline-diagnostic").setup({
-        preset = "classic",
-        transparent_bg = false,
-        transparent_cursorline = false,
-        hi = {
-          error = "DiagnosticError",
-          warn = "DiagnosticWarn",
-          info = "DiagnosticInfo",
-          hint = "DiagnosticHint",
-          arrow = "NonText",
-          background = "CursorLine",
-          mixing_color = "None",
-        },
-        options = {
-          show_source = { enabled = false, if_many = false },
-          use_icons_from_diagnostic = false,
-          set_arrow_to_diag_color = false,
-          add_messages = true,
-          throttle = 20,
-          softwrap = 30,
-          multilines = { enabled = false, always_show = false },
-          show_all_diags_on_cursorline = false,
-          enable_on_insert = false,
-          enable_on_select = false,
-          overflow = { mode = "wrap", padding = 0 },
-          break_line = { enabled = false, after = 30 },
-          format = nil,
-          virt_texts = { priority = 2048 },
-          severity = {
-            vim.diagnostic.severity.ERROR,
-            vim.diagnostic.severity.WARN,
-            vim.diagnostic.severity.INFO,
-            vim.diagnostic.severity.HINT,
-          },
-          overwrite_events = nil,
-        },
-        disabled_ft = {},
-      })
-      vim.diagnostic.config({ virtual_text = false })
-    end,
-  },
+pack.add({ "https://github.com/echasnovski/mini.icons" })
+pack.lazy({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
 
-  -- ════════════════════════════════════════════════════════════════════════════
-  -- Render Markdown (in-buffer rendering)
-  -- ════════════════════════════════════════════════════════════════════════════
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown" },
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
-    opts = {
-      heading = {
-        enabled = true,
-        sign = false,
-        icons = { "# ", "## ", "### ", "#### ", "##### ", "###### " },
-      },
-      code = {
-        enabled = true,
-        sign = false,
-        style = "full",
-        left_pad = 1,
-        right_pad = 1,
-        border = "thin",
-        language_pad = 1,
-      },
-      bullet = {
-        enabled = true,
-        icons = { "●", "○", "◆", "◇" },
-      },
-      checkbox = {
-        enabled = true,
-        unchecked = { icon = "☐ " },
-        checked = { icon = "☑ " },
-      },
-      quote = { enabled = true, icon = "▎" },
-      pipe_table = { enabled = true, style = "full" },
-      callout = {
-        note = { raw = "[!NOTE]", rendered = " Note", highlight = "RenderMarkdownInfo" },
-        tip = { raw = "[!TIP]", rendered = " Tip", highlight = "RenderMarkdownSuccess" },
-        important = {
-          raw = "[!IMPORTANT]",
-          rendered = " Important",
-          highlight = "RenderMarkdownHint",
-        },
-        warning = { raw = "[!WARNING]", rendered = " Warning", highlight = "RenderMarkdownWarn" },
-        caution = { raw = "[!CAUTION]", rendered = " Caution", highlight = "RenderMarkdownError" },
+pack.load_on("User", "tiny-inline-diagnostic.nvim", function()
+  require("tiny-inline-diagnostic").setup({
+    preset = "classic",
+    options = {
+      show_source = { enabled = false, if_many = false },
+      add_messages = true,
+      throttle = 20,
+      multilines = { enabled = false, always_show = false },
+      show_all_diags_on_cursorline = false,
+      enable_on_insert = false,
+      enable_on_select = false,
+      overflow = { mode = "wrap", padding = 0 },
+      virt_texts = { priority = 2048 },
+      severity = {
+        vim.diagnostic.severity.ERROR,
+        vim.diagnostic.severity.WARN,
+        vim.diagnostic.severity.INFO,
+        vim.diagnostic.severity.HINT,
       },
     },
-    keys = {
-      {
-        "<leader>mr",
-        "<cmd>RenderMarkdown toggle<cr>",
-        desc = "Render Markdown Toggle",
-        ft = "markdown",
-      },
+  })
+  -- Inline diagnostics replace virtual text (see plugins/lsp.lua)
+  vim.diagnostic.config({ virtual_text = false })
+end, "UIEnter")
+
+pack.lazy({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" })
+
+pack.load_on("FileType", "render-markdown.nvim", function()
+  require("render-markdown").setup({
+    heading = {
+      enabled = true,
+      sign = false,
+      icons = { "# ", "## ", "### ", "#### ", "##### ", "###### " },
     },
-  },
-}
+    code = {
+      enabled = true,
+      sign = false,
+      style = "full",
+      left_pad = 1,
+      right_pad = 1,
+      border = "thin",
+      language_pad = 1,
+    },
+    bullet = {
+      enabled = true,
+      icons = { "●", "○", "◆", "◇" },
+    },
+    checkbox = {
+      enabled = true,
+      unchecked = { icon = "☐ " },
+      checked = { icon = "☑ " },
+    },
+    quote = { enabled = true, icon = "▎" },
+    pipe_table = { enabled = true, style = "full" },
+    callout = {
+      note = { raw = "[!NOTE]", rendered = " Note", highlight = "RenderMarkdownInfo" },
+      tip = { raw = "[!TIP]", rendered = " Tip", highlight = "RenderMarkdownSuccess" },
+      important = {
+        raw = "[!IMPORTANT]",
+        rendered = " Important",
+        highlight = "RenderMarkdownHint",
+      },
+      warning = { raw = "[!WARNING]", rendered = " Warning", highlight = "RenderMarkdownWarn" },
+      caution = { raw = "[!CAUTION]", rendered = " Caution", highlight = "RenderMarkdownError" },
+    },
+  })
+end, "markdown")
+
+vim.keymap.set("n", "<leader>mr", function()
+  if vim.bo.filetype == "markdown" then
+    pack.load("render-markdown.nvim", nil)
+    vim.cmd("RenderMarkdown toggle")
+  end
+end, { desc = "Render Markdown Toggle" })

@@ -1,62 +1,43 @@
--- Formatting: Conform.nvim onfiguration
-return {
-  "stevearc/conform.nvim",
-  event = { "BufWritePre" },
-  cmd = { "ConformInfo" },
-  keys = {
-    {
-      "<leader>cf",
-      function()
-        require("conform").format({ async = true }, function(err, did_edit)
-          if not err and did_edit then
-            vim.notify("Formatted", vim.log.levels.INFO)
-          end
-        end)
-      end,
-      mode = { "n", "v" },
-      desc = "Format",
-    },
+-- Formatting: conform.nvim (eager: the global `formatexpr` requires it)
+local pack = require("core.pack")
+
+pack.add({ "https://github.com/stevearc/conform.nvim" })
+
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+require("conform").setup({
+  formatters_by_ft = {
+    -- Go
+    go = { "goimports", "gofmt" },
+
+    -- Lua
+    lua = { "stylua" },
+
+    -- Web technologies
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    json = { "prettier" },
+    jsonc = { "prettier" },
+    yaml = { "prettier" },
+    markdown = { "prettier" },
+    html = { "prettier" },
+
+    -- Shell
+    sh = { "shfmt" },
+    bash = { "shfmt" },
+
+    -- Other
+    rust = { "rustfmt" },
+    odin = { "ols" },
+
+    xml = { "xmlformatter" },
   },
-  opts = {
-    formatters_by_ft = {
-      -- Go
-      go = { "goimports", "gofmt" },
+})
 
-      -- Lua
-      lua = { "stylua" },
-
-      -- Web technologies
-      javascript = { "prettier" },
-      typescript = { "prettier" },
-      json = { "prettier" },
-      jsonc = { "prettier" },
-      yaml = { "prettier" },
-      markdown = { "prettier" },
-      html = { "prettier" },
-
-      -- PHPCS
-      -- php = { "phpcs" },
-
-      -- Shell
-      sh = { "shfmt" },
-      bash = { "shfmt" },
-
-      -- Other
-      rust = { "rustfmt" },
-      odin = { "ols" },
-
-      xml = { "xmlformatter"}
-    },
-    -- default_format_opts = {
-    --   lsp_format = "fallback",
-    -- },
-    -- format_on_save = {
-    --   timeout_ms = 500,
-    --   lsp_format = "fallback",
-    -- },
-  },
-
-  init = function()
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
-}
+vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+  require("conform").format({ async = true }, function(err, did_edit)
+    if not err and did_edit then
+      vim.notify("Formatted", vim.log.levels.INFO)
+    end
+  end)
+end, { desc = "Format" })

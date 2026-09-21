@@ -60,19 +60,11 @@ api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 api.nvim_create_autocmd("FileType", {
   group = api.nvim_create_augroup("close_with_q", { clear = true }),
   pattern = {
-    "PlenaryTestPopup",
     "help",
     "lspinfo",
     "man",
-    "notify",
     "qf",
-    "spectre_panel",
-    "startuptime",
-    "tsplayground",
-    "neotest-output",
     "checkhealth",
-    "neotest-summary",
-    "neotest-output-panel",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -130,5 +122,3 @@ api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, { -- CursorHold
     end
   end,
 })
-
-
