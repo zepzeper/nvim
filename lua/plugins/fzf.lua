@@ -19,13 +19,13 @@ local function load(fn)
       -- Derive all fzf colors from the active colorscheme (follows
       -- nordic/gruvbox switches automatically).
       fzf_colors = true,
-      keymap = {
-        builtin = {
-          ["ctrl-p"] = "toggle-preview",
-          ["ctrl-d"] = "preview-page-down",
-          ["ctrl-u"] = "preview-page-up",
-        },
-      },
+      -- keymap = {
+      --   builtin = {
+      --     ["ctrl-p"] = "toggle-preview",
+      --     ["ctrl-d"] = "preview-page-down",
+      --     ["ctrl-u"] = "preview-page-up",
+      --   },
+      -- },
     })
     -- Serve vim.ui.select (used by e.g. apidocs.nvim) through fzf-lua
     fzf.register_ui_select()
