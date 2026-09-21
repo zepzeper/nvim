@@ -21,8 +21,18 @@ local function load(fn)
       -- Derive all fzf colors from the active colorscheme (follows
       -- nordic/gruvbox switches automatically).
       fzf_colors = true,
+      -- <Tab> multi-selects, <C-q>/<A-q> send selection to quickfix
+      -- (grep pickers inherit these from `actions.files`), <A-Q> sends to
+      -- the location list.
+      actions = {
+        files = {
+          ["ctrl-q"] = require("fzf-lua.actions").file_sel_to_qf,
+        },
+      },
+      -- Preview keys: all our pickers use the builtin previewer, which reads
+      -- `keymap.builtin` (native fzf previewers would read `keymap.fzf`).
       keymap = {
-        fzf = {
+        builtin = {
           ["ctrl-p"] = "toggle-preview",
           ["ctrl-d"] = "preview-page-down",
           ["ctrl-u"] = "preview-page-up",
