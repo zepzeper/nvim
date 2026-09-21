@@ -19,13 +19,23 @@ local function load(fn)
       -- Derive all fzf colors from the active colorscheme (follows
       -- nordic/gruvbox switches automatically).
       fzf_colors = true,
-      -- keymap = {
-      --   builtin = {
-      --     ["ctrl-p"] = "toggle-preview",
-      --     ["ctrl-d"] = "preview-page-down",
-      --     ["ctrl-u"] = "preview-page-up",
-      --   },
-      -- },
+      -- Bind tables REPLACE defaults unless `[1] = true` inherits them.
+      -- Preview keys: the builtin previewer (used by all our pickers) reads
+      -- `keymap.builtin`, not `keymap.fzf` (that's for bat/cat/... previewers).
+      actions = {
+        files = {
+          true, -- inherit defaults (enter, <A-q> quickfix, <A-Q> loclist, ...)
+          ["ctrl-q"] = require("fzf-lua.actions").file_sel_to_qf,
+        },
+      },
+      keymap = {
+        builtin = {
+          true, -- inherit defaults (<F1>-<F9>, <M-Esc>, <S-down>/<S-up>, ...)
+          ["ctrl-p"] = "toggle-preview",
+          ["ctrl-d"] = "preview-page-down",
+          ["ctrl-u"] = "preview-page-up",
+        },
+      },
     })
     -- Serve vim.ui.select (used by e.g. apidocs.nvim) through fzf-lua
     fzf.register_ui_select()
