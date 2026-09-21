@@ -31,9 +31,11 @@ local function load(fn)
       keymap = {
         builtin = {
           true, -- inherit defaults (<F1>-<F9>, <M-Esc>, <S-down>/<S-up>, ...)
-          ["ctrl-p"] = "toggle-preview",
-          ["ctrl-d"] = "preview-page-down",
-          ["ctrl-u"] = "preview-page-up",
+          -- NOTE: keys must use neovim notation ("<C-d>", not "ctrl-d") —
+          -- these become terminal-mode mappings in the fzf window.
+          ["<C-p>"] = "toggle-preview",
+          ["<C-d>"] = "preview-page-down",
+          ["<C-u>"] = "preview-page-up",
         },
       },
     })
