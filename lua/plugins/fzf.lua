@@ -8,15 +8,14 @@ local function load(fn)
     local fzf = require("fzf-lua")
     fzf.setup({
       -- Ivy-style bottom split, like the previous snacks picker layout:
-      -- a fixed-height split at the bottom, no border, preview hidden
-      -- (toggle with <C-p>, scroll with <C-d>/<C-u>).
+      -- a fixed-height split at the bottom, no border, preview on the
+      -- right (toggle with <C-p>, scroll with <C-d>/<C-u>).
       winopts = {
         split = "belowright 13new",
         border = "none",
         preview = {
-          hidden = true,
-          layout = "vertical",
-          vertical = "down:45%",
+          layout = "horizontal",
+          horizontal = "right:50%",
         },
       },
       -- Derive all fzf colors from the active colorscheme (follows
