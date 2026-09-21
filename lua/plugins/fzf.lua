@@ -7,9 +7,7 @@ local function load(fn)
   return pack.wrap("fzf-lua", function()
     local fzf = require("fzf-lua")
     fzf.setup({
-      -- Ivy-style bottom split, like the previous snacks picker layout:
-      -- a fixed-height split at the bottom, no border, preview on the
-      -- right (toggle with <C-p>, scroll with <C-d>/<C-u>).
+      -- Ivy-style bottom split
       winopts = {
         split = "belowright 20new",
         border = "none",
@@ -21,16 +19,6 @@ local function load(fn)
       -- Derive all fzf colors from the active colorscheme (follows
       -- nordic/gruvbox switches automatically).
       fzf_colors = true,
-      -- <Tab> multi-selects, <C-q>/<A-q> send selection to quickfix
-      -- (grep pickers inherit these from `actions.files`), <A-Q> sends to
-      -- the location list.
-      actions = {
-        files = {
-          ["ctrl-q"] = require("fzf-lua.actions").file_sel_to_qf,
-        },
-      },
-      -- Preview keys: all our pickers use the builtin previewer, which reads
-      -- `keymap.builtin` (native fzf previewers would read `keymap.fzf`).
       keymap = {
         builtin = {
           ["ctrl-p"] = "toggle-preview",
