@@ -1,9 +1,6 @@
 -- Coding: completion, treesitter, Lua dev, comments
 local pack = require("core.pack")
 
--- ════════════════════════════════════════════════════════════════════════════
--- Completion (blink.cmp) — loaded on first insert
--- ════════════════════════════════════════════════════════════════════════════
 pack.lazy({
   -- Track release tags
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("*") },
