@@ -11,7 +11,7 @@ local function load(fn)
       -- a fixed-height split at the bottom, no border, preview on the
       -- right (toggle with <C-p>, scroll with <C-d>/<C-u>).
       winopts = {
-        split = "belowright 13new",
+        split = "belowright 20new",
         border = "none",
         preview = {
           layout = "horizontal",
