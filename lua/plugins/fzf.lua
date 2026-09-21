@@ -6,7 +6,30 @@ pack.lazy({ "https://github.com/ibhagwan/fzf-lua" })
 local function load(fn)
   return pack.wrap("fzf-lua", function()
     local fzf = require("fzf-lua")
-    fzf.setup({})
+    fzf.setup({
+      -- Ivy-style bottom split, like the previous snacks picker layout:
+      -- a fixed-height split at the bottom, no border, preview hidden
+      -- (toggle with <C-p>, scroll with <C-d>/<C-u>).
+      winopts = {
+        split = "belowright 13new",
+        border = "none",
+        preview = {
+          hidden = true,
+          layout = "vertical",
+          vertical = "down:45%",
+        },
+      },
+      -- Derive all fzf colors from the active colorscheme (follows
+      -- nordic/gruvbox switches automatically).
+      fzf_colors = true,
+      keymap = {
+        fzf = {
+          ["ctrl-p"] = "toggle-preview",
+          ["ctrl-d"] = "preview-page-down",
+          ["ctrl-u"] = "preview-page-up",
+        },
+      },
+    })
     -- Serve vim.ui.select (used by e.g. apidocs.nvim) through fzf-lua
     fzf.register_ui_select()
   end, fn)
