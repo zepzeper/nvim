@@ -7,6 +7,16 @@ pack.lazy({
 })
 
 pack.load_on("InsertEnter", "blink.cmp", function()
+  -- lazydev first: its blink integration module must be on 'runtimepath'
+  -- before blink's sources resolve
+  pack.load("lazydev.nvim", function()
+    require("lazydev").setup({
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    })
+  end)
+
   require("blink.cmp").setup({
     snippets = { preset = "default" },
     signature = { enabled = true },
@@ -115,17 +125,12 @@ vim.api.nvim_create_autocmd("FileType", {
 require("treesitter-context").setup()
 
 -- ════════════════════════════════════════════════════════════════════════════
--- Lua development (lazydev) — loaded on first Lua buffer
+-- Lua development (lazydev) — registered lazy, loaded together with blink.cmp
+-- below: blink's `lazydev` source requires `lazydev.integrations.blink` on
+-- InsertEnter, so lazydev must be on 'runtimepath' by then (a FileType
+-- trigger races blink's earlier InsertEnter trigger).
 -- ════════════════════════════════════════════════════════════════════════════
 pack.lazy({ "https://github.com/folke/lazydev.nvim" })
-
-pack.load_on("FileType", "lazydev.nvim", function()
-  require("lazydev").setup({
-    library = {
-      { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-    },
-  })
-end, "lua")
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- Comments
