@@ -1,7 +1,7 @@
 -- Editing: orgmode — loaded on the first org buffer
 local pack = require("core.pack")
 
-pack.lazy({ "https://github.com/nvim-orgmode/orgmode" })
+pack.load({ "https://github.com/nvim-orgmode/orgmode" })
 
 pack.load_on("FileType", "orgmode", function()
   require("orgmode").setup({
