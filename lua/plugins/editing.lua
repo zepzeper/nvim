@@ -1,9 +1,10 @@
--- Editing: orgmode — loaded on the first org buffer
+-- Editing: orgmode — loaded shortly after startup (like the original
+-- VeryLazy setup); its own FileType autocmds then attach to org buffers
 local pack = require("core.pack")
 
 pack.lazy({ "https://github.com/nvim-orgmode/orgmode" })
 
-pack.load_on("FileType", "orgmode", function()
+pack.load_on("UIEnter", "orgmode", function()
   require("orgmode").setup({
     org_agenda_files = { "~/orgfiles/*.org" },
     org_default_notes_file = "~/orgfiles/inbox.org",
@@ -34,9 +35,4 @@ pack.load_on("FileType", "orgmode", function()
       },
     },
   })
-  -- setup() registers orgmode's own FileType autocmd, but this buffer's
-  -- FileType event already fired — re-dispatch so orgmode attaches to it.
-  if vim.bo.filetype == "org" then
-    vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
-  end
-end, "org")
+end)
