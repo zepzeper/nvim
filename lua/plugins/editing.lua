@@ -1,7 +1,7 @@
 -- Editing: orgmode — loaded on the first org buffer
 local pack = require("core.pack")
 
-pack.load({ "https://github.com/nvim-orgmode/orgmode" })
+pack.lazy({ "https://github.com/nvim-orgmode/orgmode" })
 
 pack.load_on("FileType", "orgmode", function()
   require("orgmode").setup({
@@ -34,4 +34,9 @@ pack.load_on("FileType", "orgmode", function()
       },
     },
   })
+  -- setup() registers orgmode's own FileType autocmd, but this buffer's
+  -- FileType event already fired — re-dispatch so orgmode attaches to it.
+  if vim.bo.filetype == "org" then
+    vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
+  end
 end, "org")

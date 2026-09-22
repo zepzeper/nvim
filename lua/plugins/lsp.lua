@@ -152,6 +152,7 @@ vim.lsp.config("*", {
 })
 
 vim.lsp.enable({
+  "org",
   "lua_ls",
   "zls",
   "rust_analyzer",
