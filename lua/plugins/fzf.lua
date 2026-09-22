@@ -119,6 +119,16 @@ vim.keymap.set("n", "<leader>uC", load(function()
 end), { desc = "Colorschemes" })
 
 -- ════════════════════════════════════════════════════════════════════════════
+-- <leader>d = Diagnostics
+-- ════════════════════════════════════════════════════════════════════════════
+vim.keymap.set("n", "<leader>dd", load(function()
+  require("fzf-lua").diagnostics_document()
+end), { desc = "Document Diagnostics" })
+vim.keymap.set("n", "<leader>dw", load(function()
+  require("fzf-lua").diagnostics_workspace()
+end), { desc = "Workspace Diagnostics" })
+
+-- ════════════════════════════════════════════════════════════════════════════
 -- g = Goto (LSP navigation through the picker)
 -- ════════════════════════════════════════════════════════════════════════════
 vim.keymap.set("n", "gd", load(function()

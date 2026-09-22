@@ -4,13 +4,16 @@ local pack = require("core.pack")
 pack.add({ "https://github.com/echasnovski/mini.icons" })
 pack.lazy({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
 
-pack.load_on("User", "tiny-inline-diagnostic.nvim", function()
+pack.load_on("UIEnter", "tiny-inline-diagnostic.nvim", function()
   require("tiny-inline-diagnostic").setup({
     preset = "classic",
     options = {
       show_source = { enabled = false, if_many = false },
       add_messages = true,
       throttle = 20,
+      -- Default is { "LspAttach" } only, which misses nvim-lint diagnostics
+      -- (phpstan etc. publish without an LSP client)
+      overwrite_events = { "LspAttach", "DiagnosticChanged" },
       multilines = { enabled = false, always_show = false },
       show_all_diags_on_cursorline = false,
       enable_on_insert = false,
@@ -27,7 +30,7 @@ pack.load_on("User", "tiny-inline-diagnostic.nvim", function()
   })
   -- Inline diagnostics replace virtual text (see plugins/lsp.lua)
   vim.diagnostic.config({ virtual_text = false })
-end, "UIEnter")
+end)
 
 pack.lazy({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" })
 
