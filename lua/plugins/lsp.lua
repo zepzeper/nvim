@@ -72,9 +72,7 @@ local function setup_keymaps(bufnr)
 
   map("n", "K", function()
     vim.lsp.buf.hover({
-      border = "rounded",
-      max_width = 100,
-      max_height = 30,
+      border = "shadow",
       focusable = true,
       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
       silent = true,
