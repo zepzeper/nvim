@@ -70,7 +70,25 @@ local function setup_keymaps(bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, silent = true })
   end
 
-  map("n", "K", vim.lsp.buf.hover, "Hover")
+  map("n", "K", function()
+    vim.lsp.buf.hover({
+      border = "rounded",
+      max_width = 100,
+      max_height = 30,
+      focusable = true,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      silent = true,
+
+      -- Map floating-window highlight groups
+      winhighlight = table.concat({
+        "Normal:NormalFloat",
+        "FloatBorder:FloatBorder",
+        "CursorLine:CursorLine",
+        "Search:None",
+      }, ","),
+    })
+  end, { desc = "LSP hover documentation" })
+
   map("n", "<leader>vws", vim.lsp.buf.workspace_symbol, "Workspace Symbol")
   map("n", "<leader>vd", vim.diagnostic.open_float, "Line Diagnostics")
   map("n", "<leader>vca", vim.lsp.buf.code_action, "Code Action")
