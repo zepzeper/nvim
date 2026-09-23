@@ -49,7 +49,7 @@ pack.load_on("InsertEnter", "blink.cmp", function()
     },
     completion = {
       menu = {
-        border = "rounded",
+        border = "solid",
         scrolloff = 1,
         scrollbar = false,
         draw = {
@@ -65,7 +65,7 @@ pack.load_on("InsertEnter", "blink.cmp", function()
       },
       documentation = {
         window = {
-          border = "rounded",
+          border = "solid",
           scrollbar = false,
           winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
         },
