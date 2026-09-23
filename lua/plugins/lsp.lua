@@ -61,6 +61,16 @@ require("mason-tool-installer").setup({
   },
 })
 
+vim.api.nvim_set_hl(0, "NormalFloat", {
+  bg = "#1e1e2e",
+  fg = "#cdd6f4",
+})
+
+vim.api.nvim_set_hl(0, "FloatBorder", {
+  bg = "#1e1e2e",
+  fg = "#585b70",
+})
+
 -- ════════════════════════════════════════════════════════════════════════════
 -- LSP Keymaps (applied per-buffer on attach)
 -- Global `gd`/`gr`/... navigation lives in plugins/fzf.lua.
