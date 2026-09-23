@@ -85,7 +85,7 @@ local function setup_keymaps(bufnr)
         "Search:None",
       }, ","),
     })
-  end, { desc = "LSP hover documentation" })
+  end, "LSP hover documentation" )
 
   map("n", "<leader>vws", vim.lsp.buf.workspace_symbol, "Workspace Symbol")
   map("n", "<leader>vd", vim.diagnostic.open_float, "Line Diagnostics")
