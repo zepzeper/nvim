@@ -61,16 +61,6 @@ require("mason-tool-installer").setup({
   },
 })
 
-vim.api.nvim_set_hl(0, "NormalFloat", {
-  bg = "#1e1e2e",
-  fg = "#cdd6f4",
-})
-
-vim.api.nvim_set_hl(0, "FloatBorder", {
-  bg = "#1e1e2e",
-  fg = "#585b70",
-})
-
 -- ════════════════════════════════════════════════════════════════════════════
 -- LSP Keymaps (applied per-buffer on attach)
 -- Global `gd`/`gr`/... navigation lives in plugins/fzf.lua.
@@ -80,21 +70,7 @@ local function setup_keymaps(bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, silent = true })
   end
 
-  map("n", "K", function()
-    vim.lsp.buf.hover({
-      border = "single",
-      focusable = true,
-      close_events = {
-        "BufLeave",
-        "CursorMoved",
-        "InsertEnter",
-        "FocusLost",
-      },
-      silent = true,
-      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:None",
-    })
-  end, "LSP hover documentation")
-
+  map("n", "K", vim.lsp.buf.hover, "Hover")
   map("n", "<leader>vws", vim.lsp.buf.workspace_symbol, "Workspace Symbol")
   map("n", "<leader>vd", vim.diagnostic.open_float, "Line Diagnostics")
   map("n", "<leader>vca", vim.lsp.buf.code_action, "Code Action")
