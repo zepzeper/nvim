@@ -35,6 +35,7 @@ require("mason-tool-installer").setup({
     "json-lsp",
     "yaml-language-server",
     "slang",
+    "nil",
     -- Build tooling, not an LSP: nvim-treesitter shells out to the
     -- tree-sitter CLI to build and generate parsers, and fails every
     -- parser with "ENOENT" when it is absent. Nothing in runs/ installs
@@ -164,4 +165,5 @@ vim.lsp.enable({
   "ols",
   "slang",
   "jinja-lsp",
+  "nil"
 })

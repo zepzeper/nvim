@@ -25,10 +25,12 @@ require("conform").setup({
     -- Shell
     sh = { "shfmt" },
     bash = { "shfmt" },
+    zsh = { "shfmt" },
 
     -- Other
     rust = { "rustfmt" },
     odin = { "ols" },
+    nix = { "nixfmt" },
 
     xml = { "xmlformatter" },
   },
